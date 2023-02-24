@@ -8,6 +8,14 @@ $email = $_POST['email'];
 $nome = $_POST['nome'];
 $senha = $_POST['senha'];
 
+//esse result vai pegar as informações do aluno com o email 
+$result1 = $con ->query("SELECT email from alunos where email='$email'");
+
+if($result1 -> num_rows != 0){
+    echo "<p>Email já casdatrado, escolha um email diferente</p>";
+    echo "<a href='../editaluno.php'><button>voltar</button></a>";
+}else{
+
 //faz o select em alunos pelo id do aluno
 $sql = $con->query("SELECT * FROM alunos WHERE id_aluno ='$id'");
 
@@ -38,5 +46,6 @@ if($result === TRUE){
     echo "<p>Algo deu errado</p>";
     echo "Error: " . $sql . "<br>" . $con->error;
     echo "<a href='../editaluno.php'><button>Voltar</button></a>";
+}
 }
 ?>

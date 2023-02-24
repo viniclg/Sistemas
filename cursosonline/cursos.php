@@ -18,5 +18,5 @@ echo "<input type='submit' value='Enviar'>";
 
 ?>
 </form>
-<a href='.//site.php'><button>Voltar</button></a>
+<a href='site.php'><button>Voltar</button></a>
 

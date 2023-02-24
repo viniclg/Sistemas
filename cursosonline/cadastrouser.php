@@ -11,3 +11,7 @@
         <label>Senha :</label>
         <input type="password" name="senhauser" id="senha" /><br/>
         <input type="submit" value="CRIAR"/>
+</fieldset>
+</form>
+
+<a href='index.php'><button>Voltar</button></a>
