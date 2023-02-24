@@ -62,5 +62,6 @@ $con->close();
  <p><a href='../inserircursos.php'><button>Inserir algum curso</button></a></p>
  <p><a href='deslog.php'><button>Logout</button></a></p>
  <p><a href='../editarcurso.php'><button>Editar algum curso</button></a></p>
+ <p><a href='relatorio.php'><button>Pegue esse relátorio em txt</button></a></p>
 
 </body>
