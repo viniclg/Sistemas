@@ -6,6 +6,7 @@ $nome = $_SESSION['nome_aluno'];
 $email = $_SESSION['email'];
 
 $id_curso = $_POST['nomecurso'];
+$preco = $_POST['preco'];
 
 //esse resultado vai pegar as informações do aluno com o mesmo id de aluno e id de curso no banco
 $resultado1 = $con -> query("SELECT * FROM curso_aluno WHERE id_curso = '$id_curso' and id_aluno = '$id'");
@@ -34,8 +35,8 @@ $vagas= $row['vaga'];
     }
     else{
 
-$sql = "INSERT INTO curso_aluno (id_aluno, id_curso, nome_aluno, email_aluno, nome_curso) 
-VALUES ('$id','$id_curso', '$nome', '$email','$nomecur')";
+$sql = "INSERT INTO curso_aluno (id_aluno, id_curso, nome_aluno, email_aluno, nome_curso, preco_curso) 
+VALUES ('$id','$id_curso', '$nome', '$email','$nomecur','$preco')";
 
 //esse update atualiza o número de vagas pra diminuir 1 vaga
 $update = "UPDATE cursos SET vaga = vaga -1 WHERE id_cursos = '$id_curso'";

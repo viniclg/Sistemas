@@ -10,8 +10,8 @@ $result = $con -> query("SELECT * FROM cursos");
 
     //o fetch_assoc vai colocar as informações do banco em variáveis $row['nome do atributo']
    while ($row = $result -> fetch_assoc()) {
-   echo "<p><input type='radio' name='nomecurso' value='" . $row['id_cursos'] . "'>" . $row['nome'] ."<br>Preço ".$row['preco']. "<br>"."Vagas:".$row['vaga']."<br>";
-
+   echo "<p><input type='radio' name='nomecurso' value='" . $row['id_cursos'] . "'>" . $row['nome'] ."<br>"."Vagas:".$row['vaga']."<br>";
+   echo "Preço: <input type='number'  min = ".$row['preco']." max =".$row['preco']." name='preco' value=".$row['preco']."><br>";
 }
 
 echo "<input type='submit' value='Enviar'>";

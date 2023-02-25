@@ -11,6 +11,7 @@ $senha = $_POST['senha'];
 //esse result vai pegar as informações do aluno com o email 
 $result1 = $con ->query("SELECT email from alunos where email='$email'");
 
+//se o result voltar diferente de 0, quer dizer que já tem um aluno com o email, e não vai deixar mudar
 if($result1 -> num_rows != 0){
     echo "<p>Email já casdatrado, escolha um email diferente</p>";
     echo "<a href='../editaluno.php'><button>voltar</button></a>";
