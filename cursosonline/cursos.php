@@ -1,4 +1,12 @@
-<legend>Selecione o curso que você quer fazer!</legend>
+<link rel="stylesheet" href="css/cursos.css">
+<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+
+<div id="container">
+<div id="header">
+<span>Selecione o curso que você quer fazer!</span>
+
+</div>
+
 <?php
 
 echo "<form method='POST' action='php_action/curaluno.php' id='formlogin' name='formlogin'>";
@@ -14,9 +22,10 @@ $result = $con -> query("SELECT * FROM cursos");
    echo "Preço: <input type='number'  min = ".$row['preco']." max =".$row['preco']." name='preco' value=".$row['preco']."><br>";
 }
 
-echo "<input type='submit' value='Enviar'>";
+echo "<button id='new'>Entrar</button>";
 
 ?>
 </form>
-<a href='site.php'><button>Voltar</button></a>
+<br><a href='site.php'><button id="new">Voltar</button></a>
+</div>
 

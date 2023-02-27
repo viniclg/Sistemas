@@ -8,6 +8,12 @@ $email = $_SESSION['email'];
 $id_curso = $_POST['nomecurso'];
 $preco = $_POST['preco'];
 
+if($id_curso == ""){
+    echo "<p>Selecione uma opção válida!</p>";
+    echo "<a href='../cursos.php'><button>Voltar</button></a>";
+
+}else{
+
 //esse resultado vai pegar as informações do aluno com o mesmo id de aluno e id de curso no banco
 $resultado1 = $con -> query("SELECT * FROM curso_aluno WHERE id_curso = '$id_curso' and id_aluno = '$id'");
 
@@ -48,6 +54,7 @@ $resultado = mysqli_query($con, $update);
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
         }
+    }
     }
 }
 ?>

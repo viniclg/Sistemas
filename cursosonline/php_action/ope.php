@@ -21,15 +21,13 @@ if($email == $email_adm){
         $_SESSION['nome'] = $nome;
         $_SESSION['email'] = $email; 
         header("Location: admin_profile.php");
+    }elseif($email == ""){
+        echo 'Você esqueceu de inserir algum campo.';
+        echo "<a href='../index.php'><button>Voltar</button></a>";
     }
 }
 else
 { $senha = md5($senha);
-
-if($email == "" || $senha == ""){
-    echo 'Você esqueceu de inserir algum campo.';
-    echo "<a href='../index.php'><button>Voltar</button></a>";
-    }
 
 $result = $con->query("SELECT * FROM alunos WHERE email = '$email' AND senha = '$senha'"); 
 

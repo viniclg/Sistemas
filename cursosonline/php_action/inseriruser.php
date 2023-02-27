@@ -1,8 +1,8 @@
 <?php
 require_once 'conexao.php';
 
-$nome = $_POST['loginuser'];
-$senha = ($_POST['senhauser']);
+$nome = $_POST['nome'];
+$senha = ($_POST['senha']);
 $email = $_POST['email'];
 $senha = md5($senha);
 
@@ -14,7 +14,7 @@ $row = mysqli_fetch_array($result);
 o isset e !empty vai verificar se o que foi inserido no formulário é diferente de nulo
 se for nulo não vai deixar o usuário se cadastrar
 */
-if (isset($_POST['senhauser']) && !empty($_POST['email'])) {
+if (isset($_POST['senha']) && !empty($_POST['email'])) {
 
     //se a senha ou email estiver já no banco de dados vai mostrar a mensagem
     if($row) {
@@ -34,7 +34,7 @@ if (isset($_POST['senhauser']) && !empty($_POST['email'])) {
     }else {
 
         echo 'Insira uma senha válida.';
-        echo "<a href='../cadastrouser.php'><button>CADASTRO</button></a>";
+        echo "<br><a href='../index.php'><button>CADASTRO</button></a>";
     }
 
 $con->close();

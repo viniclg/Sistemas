@@ -21,12 +21,13 @@ if ($result->num_rows > 0) {
         echo "<tr>";
         echo "<td>".$row['id_aluno']."</td>";
         echo "<td>".$row['nome']."</td>";
-        echo "<td>".$row['email']."R$</td>";
+        echo "<td>".$row['email']."</td>";
         echo "</tr>";
 
     }
 } 
-echo "</table><br>";
+echo "<div class='container'>
+</table><br>";
 
 echo "Todos registros de cursos";
 

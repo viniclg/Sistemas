@@ -1,6 +1,6 @@
-<head>
-<link rel="stylesheet" href="css/site.css">
-</head>
+<link rel="stylesheet" href="css/index.css">
+<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+
 <?php
 require_once 'php_action/conexao.php';
 
@@ -9,19 +9,14 @@ $nome = $_SESSION['nome_aluno'];
 $id = $_SESSION['id'];
 
 echo "<div class='container'>
+<div class='header'>
+<span>BEM VINDO AO SITE </br>".$nome."</br></span>
 <body>
   
-BEM VINDO AO SITE </br>".$nome."</br>
-<ul>
-<p><a href='cursos.php'><button id='new'>Se inscrever em algum curso</button></a></p>
-<br><p><a href='php_action/deslog.php'><button id='new'>Logout</button></a></p>
-<br><p><a href='editaluno.php'><button id='new'>Editar seus dados</button></a></p>
-</ul>
-
-<div class='header'>
   </div>";
+  ?>
 
-
+<?php
 echo "<br>Você está inscrito nos cursos: ";
 
 echo "<div class='divTable'>";
@@ -45,15 +40,54 @@ if ($result->num_rows > 0) {
 
     }
 } 
-echo "</thead>
+?>
+</thead>
 <tbody>
 </tbody>
 </table>
+<ul>
+<br><p><a href ="cursos.php"><button id="new">Se inscrever em algum curso</button></a></p>
+
+<br><button id ="new" onclick="openModal1()">Editar seus dados</button><br>
+
+<br><a href="php_action/deslog.php"><p><button id="new">Logout</button></a></p>
+
+</ul>
 </div>
 </div>
-</body>";
+
+
+<?php
+require_once 'php_action/conexao.php';
+
+$sql = $con -> query("SELECT * FROM alunos WHERE id_aluno ='$id'");
+if ($sql->num_rows > 0) {
+  while($row = $sql -> fetch_assoc()) {
+
+
+echo "<div class='modal-container'>
+<div class='modal'>
+  <form method='POST' action='php_action/editaluno.php'>
+    <label for='m-nome'>Nome</label>";
+    echo "<input id='m-nome' type='text' name='nome' value=".$row['nome'].">";
+
+    echo "<label for='m-funcao'>Email</label>";
+    echo "<input id='m-funcao' type='text' name='email' value=".$row['email'].">";
+
+echo "<label for='m-salario'>Senha</label>";
+
+    echo "<input type='password' name='senha' id='m-salario' value=".$row['senha'].">";
+    echo "<button id='btnSalvar'>Editar</button>
+  </form>
+</div>
+</div>";
+}
+}
+
 
 $con->close();
 
 ?> 
+</body>
+<script src="js/cursos.js"></script>
   
