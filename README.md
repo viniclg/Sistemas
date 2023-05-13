@@ -1,2 +1,2 @@
 # Projetos de 
-Php, Python, css e javascript
+Php,css, javascript e Python
