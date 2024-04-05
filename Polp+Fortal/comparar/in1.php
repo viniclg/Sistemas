@@ -50,5 +50,6 @@ elseif($comparacao==="0"){
     echo "<h3>Selecione uma das alternativas</h3>";
 }
 ?>
+
 </body>
 </html>

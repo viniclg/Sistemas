@@ -61,4 +61,5 @@ if($_POST){
         }
     }
 }
+echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
 ?>

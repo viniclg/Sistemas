@@ -38,4 +38,5 @@ if($_POST){
         echo"Selecione uma opção";
     }
 }
+echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
 ?>

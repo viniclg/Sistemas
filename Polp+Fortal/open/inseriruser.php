@@ -28,14 +28,14 @@ if (isset($_POST['senha']) && !empty($_POST['login'])) {
     }
         if ($connect->query($sql) === TRUE) {
             echo "<p>Usuário criado com sucesso!</p>";
-            echo "<a href='cad.php'><button>HOME</button></a>";
+            echo "<a href='in.php'><button>HOME</button></a>";
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
         }
     }else {
 
         echo 'Insira uma senha válida.';
-        echo "<br><a href='index.php'><button>CADASTRO</button></a>";
+        echo "<br><a href='in.php'><button>CADASTRO</button></a>";
     }
 
 $connect->close();
