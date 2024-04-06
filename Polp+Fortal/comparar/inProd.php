@@ -36,8 +36,8 @@ if($_POST){
         $resultado=$connect->query("SELECT * FROM produtos");
         if($resultado->num_rows > 0){
             while($linha=$resultado->fetch_assoc()){
-                $nome_produto=$linha['nome'];
-                $id=$linha["id_produto"];
+                $nome_produto=$linha['Nome_Produto'];
+                $id=$linha["Id_produto"];
     
                 echo "<input type='checkbox' name='produtos[]' value=".$id.">".$nome_produto."<br>";
             }

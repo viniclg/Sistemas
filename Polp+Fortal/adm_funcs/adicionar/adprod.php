@@ -27,6 +27,7 @@ header("location:adval.php");
 }
 }
 }
+echo "</form>";
 echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
 
 ?>

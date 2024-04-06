@@ -16,10 +16,10 @@ foreach($produtos as $key_produto => $value_produto){
         $soma = array();
         $sql1 = $connect -> query("SELECT * FROM mercado");
         while($l=  $sql1-> fetch_assoc()){
-            $nome1 = $l['nome'];
-            $id = $l['id_mercado'];
+            $nome1 = $l['Nome_Mercado'];
+            $id = $l['Id_Mercado'];
         
-$result=$connect->query("SELECT valor AS soma FROM valores WHERE id_mercado='$id' and id_produto='$value_produto' GROUP BY id_mercado");
+$result=$connect->query("SELECT Valor AS soma FROM valores WHERE Id_Mercado='$id' and Id_produto='$value_produto' GROUP BY id_mercado");
 if($result->num_rows > 0){
             while($linha=$result->fetch_assoc()){
                 $som = $linha['soma'];
@@ -41,10 +41,10 @@ if($result->num_rows > 0){
         $soma = array();
         $sql1 = $connect -> query("SELECT * FROM mercado");
         while($l=  $sql1-> fetch_assoc()){
-            $nome1 = $l['nome'];
-$id = $l['id_mercado'];
+            $nome1 = $l['Nome_Mercado'];
+$id = $l['Id_Mercado'];
         
-$result=$connect->query("SELECT SUM(valor) AS soma FROM valores WHERE id_mercado='$id' GROUP BY id_mercado");
+$result=$connect->query("SELECT SUM(Valor) AS soma FROM valores WHERE Id_Mercado='$id' GROUP BY Id_Mercado");
         if($result->num_rows > 0){
             while($linha=$result->fetch_assoc()){
                 $som = $linha['soma'];
@@ -78,14 +78,14 @@ elseif($t==="2"){
     $soma = array();
     foreach($mercados as $key_mercado => $value_mercado){
 
-        $R=$connect->query("SELECT * FROM mercado WHERE id_mercado='$value_mercado'");
+        $R=$connect->query("SELECT * FROM mercado WHERE Id_Mercado='$value_mercado'");
         if($R->num_rows > 0){
             while($linha=$R->fetch_assoc()){
-                $nome_do_mercado=$linha['nome'];
+                $nome_do_mercado=$linha['Nome_Mercado'];
             }
         }
 
-        $result=$connect->query("SELECT valor AS soma FROM valores WHERE id_mercado='$value_mercado' and id_produto='$value_produto' GROUP BY id_mercado");
+        $result=$connect->query("SELECT Valor AS soma FROM valores WHERE Id_Mercado='$value_mercado' and Id_produto='$value_produto' GROUP BY Id_Mercado");
         if($result->num_rows > 0){
             while($linha=$result->fetch_assoc()){
                 $som = $linha['soma'];
@@ -106,10 +106,10 @@ else{
     $soma = array();
     $sql1 = $connect -> query("SELECT * FROM mercado");
     while($l=  $sql1-> fetch_assoc()){
-        $nome1 = $l['nome'];
-$id = $l['id_mercado'];
+        $nome1 = $l['Nome_Mercado'];
+$id = $l['Id_Mercado'];
     
-$result=$connect->query("SELECT SUM(valor) AS soma FROM valores WHERE id_mercado='$id' GROUP BY id_mercado");
+$result=$connect->query("SELECT SUM(Valor) AS soma FROM valores WHERE Id_Mercado='$id' GROUP BY Id_Mercado");
     if($result->num_rows > 0){
         while($linha=$result->fetch_assoc()){
             $som = $linha['soma'];

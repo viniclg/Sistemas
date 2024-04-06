@@ -101,10 +101,10 @@ echo '<!DOCTYPE html>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn">Dropdown 3</button>
+            <button class="dropbtn">Alterar</button>
             <div class="dropdown-content">
-                <a href="#">Link 7</a>
-                <a href="#">Link 8</a>
+                <a href="">Link 7</a>
+                <a href="adm_funcs/alterar/alterprod.php">Produto e valores</a>
                 <a href="#">Link 9</a>
             </div>
         </div>
