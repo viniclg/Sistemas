@@ -8,55 +8,138 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<h1>Consultar</h1>
-<body>
-    <form action="consultar.php" method="post">
-        <input type="search" name="pesquisa">
-        <button>Enviar</button>
-    </form>
-<table border=1px>
-<?php
-if($_POST){
-$pesquisa = $_POST['pesquisa'];
+    <title>Consultar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-$result = $connect ->query("SELECT * FROM produtos WHERE nome LIKE '%$pesquisa%'");
-if($result -> num_rows > 0){
-    echo "<th>Nome</th>
-    <th>Imagem</th>";
-    while ($row = $result -> fetch_assoc()){
-    $nome = $row['nome'];
-    $img= $row['img'];
-    echo "<tr><td>".$nome."</td><td>".$img."</td></tr>";
-    }
-}elseif($result -> num_rows == 0){
-    $re = $connect ->query("SELECT * FROM usuario WHERE nome LIKE '%$pesquisa%' or login LIKE '%$pesquisa%'");
-    if($re -> num_rows > 0){
-    echo "<th>Nome</th>
-    <th>Login</th>";
-    while ($row = $re -> fetch_assoc()){
-    $nome = $row['nome'];
-    $login= $row['login'];
-    echo "<tr><td>".$nome."</td><td>".$login."</td></tr>";
-    }
-}elseif($re -> num_rows == 0){
-    $r = $connect ->query("SELECT * FROM mercado WHERE nome LIKE '%$pesquisa%'");
-    if($r -> num_rows > 0){
-    echo "<th>Nome</th>
-    <th>Imagem</th>";
-    while ($row = $r -> fetch_assoc()){
-    $nome = $row['nome'];
-    $img= $row['img'];
-    echo "<tr><td>".$nome."</td><td>".$img."</td></tr>";
-    }
-}else{
-    echo "Isso não Existe";
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="search"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        #piechart {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        .index-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consultar</h1>
+    <form action="consultar.php" method="post">
+            <input type="search" name="pesquisa">
+            <button type="submit">Enviar</button>
+
+    </form>
+
+    <table>
+        <?php
+        if ($_POST) {
+            $pesquisa = $_POST['pesquisa'];
+            $dataArray = array(
+                array('Produto', 'Total de Pesquisas')
+            );
+
+            $result = $connect->query("SELECT * FROM produtos WHERE Nome_Produto LIKE '%$pesquisa%'");
+            if ($result->num_rows > 0) {
+                echo "<tr><th>Nome</th><th>Imagem</th></tr>";
+                while ($row = $result->fetch_assoc()) {
+                    $Nome_Produto = $row['Nome_Produto'];
+                    $Img_Produto = $row['Imagem_Produto'];
+                    $Pesquisas_Produto = intval($row['Pesquisas']);
+                    $data = array($Nome_Produto, $Pesquisas_Produto);
+                    array_push($dataArray, $data);
+                    echo "<tr><td>" . $Nome_Produto . "</td><td><img src='" . $Img_Produto . "'></td></tr>";
+                }
+                $dataJSON = json_encode($dataArray);
             }
         }
-    }
-}
-?>
-</table>
+        ?>
+    </table>
+    <div id="piechart"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(<?php echo $dataJSON; ?>);
+
+            var options = {
+                title: 'Total de Pesquisas de Produtos',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+    <a href="../../IndexADM.php"><button>Index</button></a>
+
 </body>
 </html>

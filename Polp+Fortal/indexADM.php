@@ -74,7 +74,7 @@ echo '<!DOCTYPE html>
 </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
 </head>
 <body>
 
@@ -110,11 +110,14 @@ echo '<!DOCTYPE html>
         </div>
     </div>
 
-    <div>
-        <a href="open/logout.php"><button class="logout-button">Logout</button></a>
+    <div class="dropdown">
+    <a href="open/logout.php"><button class="dropbtn">Logout</button></a>
+    </div>
+    <div class="dropdown">
+    <a href="comparar/in1.php"><button class="dropbtn">Comparar</button></a>
     </div>
     <div>
-    <a href="comparar/in1.php"><button class="logout-button">Comparar</button></a>
+    <a href="adm_funcs/consultar/consultar.php"><button class="dropbtn">Consultar</button></a>
     </div>
 </div>
 

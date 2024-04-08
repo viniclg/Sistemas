@@ -74,8 +74,8 @@ if($comparacao==="2"){
     $resultado=$connect->query("SELECT * FROM mercado");
     if($resultado->num_rows > 0){
         while($linha=$resultado->fetch_assoc()){
-            $nome_mercado=$linha['nome'];
-            $id=$linha["id_mercado"];
+            $nome_mercado=$linha['Nome_Mercado'];
+            $id=$linha["Id_Mercado"];
 
             echo "<input type='checkbox' name='mercados[]' value=".$id.">".$nome_mercado."<br>";
         }}
