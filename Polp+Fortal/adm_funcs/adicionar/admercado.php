@@ -76,7 +76,7 @@
     <?php
     require_once "../../c.php";
     session_start();
-
+if($_SESSION['tipo'] == 1){
     if ($_POST) {
         $nome = $_POST['nome'];
 
@@ -91,21 +91,25 @@
             }
         }
     }
+echo '<div class="container">
+<h1>Adicionar Mercado</h1>
+<form method="POST">
+    <label for="nome">Insira o nome do mercado</label>
+    <input type="text" name="nome" id="nome" required>
+    <br><br>
+    <label for="img">Insira a logo do mercado (O nome do arquivo e a sua extensão)</label>
+    <input type="text" name="img" id="img" required>
+    <br><br>
+    <button type="submit">Adicionar</button>
+</form>
+<br>
+<a href="../../indexADM.php" class="button">Voltar</a>
+</div>';
+}else{
+    echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+}
     ?>
-
-    <div class="container">
-        <h1>Adicionar Mercado</h1>
-        <form method="POST">
-            <label for="nome">Insira o nome do mercado</label>
-            <input type="text" name="nome" id="nome" required>
-            <br><br>
-            <label for="img">Insira a logo do mercado (O nome do arquivo e a sua extensão)</label>
-            <input type="text" name="img" id="img" required>
-            <br><br>
-            <button type="submit">Adicionar</button>
-        </form>
-        <br>
-        <a href="../../indexADM.php" class="button">Voltar</a>
-    </div>
+    
 </body>
 </html>

@@ -93,19 +93,17 @@ echo '<!DOCTYPE html>
         <div class="dropdown">
             <button class="dropbtn">Excluir</button>
             <div class="dropdown-content">
-            <a href="adm_funcs/excluir/drop.php">Administradores</a>
             <a href="adm_funcs/excluir/dropMercado.php">Mercados</a>
             <a href="adm_funcs/excluir/dropProduto.php">Produtos</a>
-            <a href="adm_funcs/excluir/dropUsuario.php">Valores</a>
+            <a href="adm_funcs/excluir/dropUsuario.php">Usuários</a>
             </div>
         </div>
 
         <div class="dropdown">
             <button class="dropbtn">Alterar</button>
             <div class="dropdown-content">
-                <a href="">Link 7</a>
+                <a href="adm_funcs/alterar/altermercado.php">Mercados</a>
                 <a href="adm_funcs/alterar/alterprod.php">Produto e valores</a>
-                <a href="#">Link 9</a>
             </div>
         </div>
     </div>

@@ -76,7 +76,7 @@
     <?php
     require_once "../../c.php";
     session_start();
-
+if($_SESSION['tipo'] == 1){
     if ($_POST) {
         $nome = $_POST['nome'];
         $senha = ($_POST['senha']);
@@ -113,17 +113,22 @@
             echo 'Insira uma senha válida.';
         }
     }
+    echo '<div class="container">
+    <h1>Cadastro de Usuário</h1>
+    <form method="POST">
+        <input type="text" name="login" placeholder="Login" required><br>
+        <input type="text" name="nome" placeholder="Nome" required><br>
+        <input type="password" name="senha" placeholder="Senha" required><br>
+        <button type="submit"> Adicionar </button>
+    </form>
+    <br><a href="../../indexADM.php" class="button">Voltar</a>
+    </div>';
+}else{
+    echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+}
     ?>
 
-    <div class="container">
-        <h1>Cadastro de Usuário</h1>
-        <form method="POST">
-            <input type="text" name="login" placeholder="Login" required><br>
-            <input type="text" name="nome" placeholder="Nome" required><br>
-            <input type="password" name="senha" placeholder="Senha" required><br>
-            <button type="submit"> Adicionar </button>
-        </form>
-        <br><a href="../../indexADM.php" class="button">Voltar</a>
-    </div>
+    
 </body>
 </html>

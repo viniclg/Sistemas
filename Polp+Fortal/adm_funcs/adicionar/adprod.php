@@ -76,7 +76,7 @@
     <?php
     require_once "../../c.php";
     session_start();
-
+if($_SESSION['tipo'] == 1){
     if ($_POST) {
         $_SESSION['nomeprod'] = $_POST['produto'];
         $nome = $_POST['produto'];
@@ -93,21 +93,26 @@
             }
         }
     }
+echo '<div class="container">
+<h1>Adicionar Produto</h1>
+<form method="POST">
+    <label for="produto">Insira um produto</label>
+    <input type="text" name="produto" id="produto" required>
+    <br><br>
+    <label for="img">Insira uma imagem para o produto</label>
+    <input type="text" name="img" id="img" required>
+    <br><br>
+    <button type="submit">Enviar</button>
+</form>
+<br>
+<a href="../../indexADM.php" class="button">Voltar</a>
+</div>';
+}else{
+    echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+}
     ?>
 
-    <div class="container">
-        <h1>Adicionar Produto</h1>
-        <form method="POST">
-            <label for="produto">Insira um produto</label>
-            <input type="text" name="produto" id="produto" required>
-            <br><br>
-            <label for="img">Insira uma imagem para o produto</label>
-            <input type="text" name="img" id="img" required>
-            <br><br>
-            <button type="submit">Enviar</button>
-        </form>
-        <br>
-        <a href="../../indexADM.php" class="button">Voltar</a>
-    </div>
+    
 </body>
 </html>

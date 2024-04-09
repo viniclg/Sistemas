@@ -56,7 +56,8 @@
             <select name="prod">
                 <?php
                 require_once '../../c.php';
-
+                session_start();
+                if($_SESSION['tipo'] == 1){
                 $result = $connect->query("SELECT * FROM produtos");
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -102,15 +103,20 @@
                     }
                 }
             }
-            ?>
-            <br>
-            <input type="submit" value="Mudar">
-        </form>
-        <form method="POST" action="../../indexADM.php">
-    <input type="submit" value="Voltar">
+        echo '<br>
+        <input type="submit" value="Mudar">
+    </form>
+    <form method="POST" action="../../indexADM.php">
+<input type="submit" value="Voltar">
 </form>
-    </div>
-    </div>
+</div>
+</div>';
+        }else{
+            echo '</select>Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+        }
+            ?>
+            
 
     <script>
         var formContainer = document.querySelector('.form-container');

@@ -129,6 +129,7 @@
                 require_once "../../c.php";
                 session_start();
 
+                if($_SESSION['tipo'] == 1){
                 $ResultadoProd = $connect->query("SELECT * FROM produtos");
                 if ($ResultadoProd->num_rows > 0) {
                     while ($LinhasProd = $ResultadoProd->fetch_assoc()) {
@@ -154,6 +155,7 @@
                 echo $mercado . ": <input type='text' name='preco[]'><br>";
                 array_push($idmercado, $idmer);
             }
+        
             ?>
             <button type="submit">Enviar</button>
         </form>
@@ -181,12 +183,18 @@
                 }
             }
         }
+    echo '<br>
+    <a href="../../indexADM.php"><button>Voltar</button></a>
+<br><br>
+<a href="adprod.php"><button>Voltar para inserir Produtos</button></a>';
+}else{
+    echo '</select></form>';
+    echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+}
     
         ?>
-        <br>
-        <a href="../../indexADM.php"><button>Voltar</button></a>
-    <br><br>
-    <a href="adprod.php"><button>Voltar para inserir Produtos</button></a>
+        
 
     </div>
 </body>

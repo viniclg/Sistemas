@@ -10,7 +10,8 @@
         <select name="Mercado_Select">
 <?php
 require_once "../../c.php";
-
+session_start();
+if($_SESSION['tipo'] == 1){
 $Select_Mercados = $connect -> query("SELECT * FROM mercado");
 if($Select_Mercados -> num_rows > 0){
     while($Result_Mercados = $Select_Mercados -> fetch_assoc()){
@@ -38,9 +39,15 @@ if($Select_Mercados -> num_rows > 0){
 
    
    echo "<input type='hidden' name='Id_Mercado' value='".$Id_Mercado."'>";
-   echo "</form>";
+   echo '</form>
+   <br><a href="../../indexADM.php"><button>Index</button></a>
+   ';
+}
+}else{
+    echo '</select>
+    Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';  
 }
    ?>
-   <br><a href="../../indexADM.php"><button>Index</button></a>
 </body>
 </html>

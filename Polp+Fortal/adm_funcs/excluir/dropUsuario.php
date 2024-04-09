@@ -21,6 +21,7 @@ session_start();
             <th>Senha</th>
             <th>-</th>
             <?php
+            if($_SESSION['tipo'] == 1){
             $sql1 = $connect -> query("SELECT * FROM usuario");
             if($sql1->num_rows > 0){
             while($l=  $sql1-> fetch_assoc()){
@@ -56,4 +57,8 @@ if($_POST){
     }
 }
 echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
+            }else{
+                echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+            }
 ?>

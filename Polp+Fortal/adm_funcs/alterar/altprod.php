@@ -1,5 +1,7 @@
 <?php
 require_once '../../c.php';
+session_start();
+if($_SESSION['tipo'] == 1){
 $prod = $_POST['idprod'];
 $valor = $_POST['valor'];
 $val = array();
@@ -107,11 +109,15 @@ $result = $connect->query("UPDATE produtos SET Nome_Produto='$nome', Imagem_Prod
         echo "<h2>Erro ao mudar</h2>";
     }
     echo "<p>Mudado com sucesso</p>";
-
-    ?>
-        <div class="button-container">
-        <a href="alterprod.php">Voltar</a>
-    </div>
+echo '<div class="button-container">
+<a href="alterprod.php">Voltar</a>
 </div>
+</div>';
+}else{
+    echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+}
+    ?>
+        
 </body>
 </html>

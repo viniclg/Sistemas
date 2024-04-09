@@ -88,15 +88,15 @@ session_start();
     </style>
 </head>
 <body>
-    <h1>Consultar</h1>
-    <form action="consultar.php" method="post">
-            <input type="search" name="pesquisa">
-            <button type="submit">Enviar</button>
-
-    </form>
-
     <table>
         <?php
+        if($_SESSION['tipo'] == 1){
+            echo '<h1>Consultar</h1>
+            <form action="consultar.php" method="post">
+                    <input type="search" name="pesquisa">
+                    <button type="submit">Enviar</button>
+        
+            </form>';
         if ($_POST) {
             $pesquisa = $_POST['pesquisa'];
             $dataArray = array(
@@ -139,7 +139,13 @@ session_start();
             chart.draw(data, options);
         }
     </script>
-    <a href="../../IndexADM.php"><button>Index</button></a>
+    <?php
+    echo '<a href="../../IndexADM.php"><button>Index</button></a>';
+        }else{
+            echo 'Você não deveria estar aqui<br>
+    <a href="../../open/logout.php"><button>Sair</button></a>';
+        }
+    ?>
 
 </body>
 </html>
