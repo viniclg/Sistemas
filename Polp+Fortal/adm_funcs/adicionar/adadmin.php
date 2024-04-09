@@ -29,15 +29,14 @@
             flex-direction: column;
         }
 
-        input[type="text"],
-        input[type="password"] {
+        input[type="text"] {
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        input[type="submit"] {
+        button {
             padding: 10px;
             background-color: #4CAF50;
             color: #fff;
@@ -46,13 +45,30 @@
             cursor: pointer;
         }
 
-        input[type="submit"]:hover {
+        button:hover {
             background-color: #45a049;
         }
 
         .message {
             text-align: center;
             margin-top: 20px;
+        }
+
+        a.button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            width: 95%;
+        }
+
+        a.button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -105,10 +121,9 @@
             <input type="text" name="login" placeholder="Login" required><br>
             <input type="text" name="nome" placeholder="Nome" required><br>
             <input type="password" name="senha" placeholder="Senha" required><br>
-            <input type="submit" value="Enviar">
-            
+            <button type="submit"> Adicionar </button>
         </form>
-        <a href="../../open/logout.php"><button>Logout</button></a>
+        <br><a href="../../indexADM.php" class="button">Voltar</a>
     </div>
 </body>
 </html>
