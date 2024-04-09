@@ -13,7 +13,6 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-<a href="drop.php"><button>Voltar</button></a>
 <form action="dropMercado.php" method="post">
     <table class="table table-success table-striped">
             <th>Nome</th>
@@ -22,8 +21,8 @@ session_start();
             $sql1 = $connect -> query("SELECT * FROM mercado");
             if($sql1->num_rows > 0){
             while($l=  $sql1-> fetch_assoc()){
-                $nome = $l['nome'];
-                $id= $l['id_mercado'];
+                $nome = $l['Nome_Mercado'];
+                $id= $l['Id_Mercado'];
 
                 echo "<tr><td>".$nome."</td><td><input type='checkbox' name='mercad[]' value=".$id."></td></tr>";
             }
@@ -41,20 +40,20 @@ if($_POST){
     $mercad= isset($_POST['mercad']) ? $_POST['mercad'] : null;
 
     foreach($mercad as $key_mercad => $value_mercad){
-        $sql= $connect->query("SELECT * FROM valores WHERE id_mercado='$value_mercad'");
+        $sql= $connect->query("SELECT * FROM valores WHERE Id_Mercado='$value_mercad'");
         while($l=  $sql-> fetch_assoc()){
-            $id_valor=$l['id_valor'];
+            $id_valor=$l['Id_Valor'];
 
-            $sqli= $connect->query("DELETE FROM valores WHERE `valores`.`id_valor` = '$id_valor'");
+            $sqli= $connect->query("DELETE FROM valores WHERE `Valores`.`Id_Valor` = '$id_valor'");
             if($sqli==TRUE){
             }
             else{
                 echo "Erro";
             }
         }
-        $sqle= $connect->query("DELETE FROM mercado WHERE `mercado`.`id_mercado` = '$value_mercad'");
+        $sqle= $connect->query("DELETE FROM mercado WHERE `mercado`.`Id_Mercado` = '$value_mercad'");
         if($sqle==TRUE){
-            header("location:dropMercado.php");
+            header("location:../../indexADM.php");
         }
         else{
             echo "Erro";

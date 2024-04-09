@@ -13,7 +13,6 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-<a href="drop.php"><button>Voltar</button></a>
 <form action="dropProduto.php" method="post">
     <table class="table table-success table-striped">
             <th>Nome</th>
@@ -22,8 +21,8 @@ session_start();
             $sql1 = $connect -> query("SELECT * FROM produtos");
             if($sql1->num_rows > 0){
             while($l=  $sql1-> fetch_assoc()){
-                $nome = $l['nome'];
-                $id= $l['id_produto'];
+                $nome = $l['Nome_Produto'];
+                $id= $l['Id_produto'];
 
                 echo "<tr><td>".$nome."</td><td><input type='checkbox' name='produt[]' value=".$id."></td></tr>";
             }
@@ -41,11 +40,11 @@ if($_POST){
     $produt= isset($_POST['produt']) ? $_POST['produt'] : null;
 
     foreach($produt as $key_produt => $value_produt){
-        $sql= $connect->query("SELECT * FROM valores WHERE id_produto='$value_produt'");
+        $sql= $connect->query("SELECT * FROM valores WHERE Id_Produto='$value_produt'");
         while($l=  $sql-> fetch_assoc()){
-            $id_valor=$l['id_valor'];
+            $id_valor=$l['Id_Valor'];
 
-            $sqli= $connect->query("DELETE FROM valores WHERE `valores`.`id_valor` = '$id_valor'");
+            $sqli= $connect->query("DELETE FROM valores WHERE `valores`.`Id_Valor` = '$id_valor'");
             if($sqli==TRUE){
             }
             else{

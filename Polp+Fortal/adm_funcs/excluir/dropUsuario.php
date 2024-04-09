@@ -13,7 +13,6 @@ session_start();
     <title>Document</title>
     <h1>Selecione o(s) que deseja excluir</h1>
 </head>
-<a href="drop.php"><button>Voltar</button></a>
 <body>
     <form action="dropUsuario.php" method="post">
     <table class="table table-success table-striped">
@@ -25,10 +24,10 @@ session_start();
             $sql1 = $connect -> query("SELECT * FROM usuario");
             if($sql1->num_rows > 0){
             while($l=  $sql1-> fetch_assoc()){
-                $nome = $l['nome'];
-                $id= $l['id_usuario'];
-                $login= $l['login'];
-                $senha= $l['senha'];
+                $nome = $l['Nome'];
+                $id= $l['Id_Usuario'];
+                $login= $l['Login'];
+                $senha= $l['Senha'];
 
                 echo "<tr><td>".$nome."</td><td>".$login."</td><td>".$senha."</td><td><input type='checkbox' name='user[]' value=".$id."></td></tr>";
             }
@@ -47,7 +46,7 @@ if($_POST){
 
     foreach($user as $key_user => $value_user){
         $id_usuario= $value_user;
-        $sql= $connect->query("DELETE FROM usuario WHERE `usuario`.`id_usuario` = '$id_usuario'");
+        $sql= $connect->query("DELETE FROM usuario WHERE `usuario`.`Id_Usuario` = '$id_usuario'");
         if($sql==TRUE){
             header("location:dropUsuario.php");
         }
