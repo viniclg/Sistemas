@@ -7,12 +7,15 @@ $senha = $_POST['senha'];
 
 if (isset($_POST['login']) || isset($_POST['senha'])) {
     echo "Insira um nome de usuário ou senha válidos
-    <button><a href=index.php>Voltar</button></a>";
+    <button><a href=in.php>Voltar</button></a>";
 }
 
 $senha = md5($senha);
 
-$result = $connect->query("SELECT * FROM usuario WHERE Login = '$login' AND Senha = '$senha'");
+$stmt = $connect->prepare("SELECT * FROM usuario WHERE Login = ? AND Senha = ?");
+$stmt->bind_param("ss", $login, $senha);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {

@@ -80,16 +80,23 @@ if($_SESSION['tipo'] == 1){
     if ($_POST) {
         $nome = $_POST['nome'];
 
-        $sql = $connect->query("SELECT * FROM mercado WHERE Nome_Mercado LIKE '%$nome%'");
-        if ($sql->num_rows > 0) {
+        $stmt = $connect->prepare("SELECT * FROM mercado WHERE Nome_Mercado LIKE ?");
+        $like = '%' . $nome . '%';
+        $stmt->bind_param("s", $like);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
             echo "Esse mercado já existe";
         } else {
             $img = $_POST['img'];
-            $result = $connect->query("INSERT INTO mercado (Id_mercado, Nome_Mercado, Imagem_Mercado) VALUES (null, '$nome', '$img')");
-            if ($result === true) {
+            $stmt = $connect->prepare("INSERT INTO mercado (Id_mercado, Nome_Mercado, Imagem_Mercado) VALUES (NULL, ?, ?)");
+            $stmt->bind_param("ss", $nome, $img);
+            
+            if ($stmt->execute() === true) {
                 echo "Deu certo";
             }
         }
+        unset($nome);
     }
 echo '<div class="container">
 <h1>Adicionar Mercado</h1>

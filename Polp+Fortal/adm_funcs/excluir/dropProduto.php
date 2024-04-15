@@ -41,25 +41,32 @@ if($_POST){
     $produt= isset($_POST['produt']) ? $_POST['produt'] : null;
 
     foreach($produt as $key_produt => $value_produt){
-        $sql= $connect->query("SELECT * FROM valores WHERE Id_Produto='$value_produt'");
-        while($l=  $sql-> fetch_assoc()){
+        $stmt = $connect->prepare("SELECT * FROM valores WHERE Id_Produto = ?");
+        $stmt->bind_param("i", $value_produt);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        while($l=  $result-> fetch_assoc()){
             $id_valor=$l['Id_Valor'];
 
-            $sqli= $connect->query("DELETE FROM valores WHERE `valores`.`Id_Valor` = '$id_valor'");
-            if($sqli==TRUE){
+            $Prepara_DeleteValor= $connect->prepare("DELETE FROM valores WHERE `valores`.`Id_Valor` = ?");
+            $Prepara_DeleteValor->bind_param("i",$id_valor);
+            if($Prepara_DeleteValor->execute()==TRUE){
             }
             else{
                 echo "Erro";
             }
         }
-        $sqle= $connect->query("DELETE FROM produtos WHERE `produtos`.`id_produto` = '$value_produt'");
-        if($sqle==TRUE){
+        $Prepara_DeleteProduto = $connect->prepare("DELETE FROM produtos WHERE `produtos`.`id_produto` = ?");
+        $Prepara_DeleteProduto->bind_param("i",$value_produt);
+        if($Prepara_DeleteProduto->execute()==TRUE){
             header("location:dropProduto.php");
         }
         else{
             echo "Erro";
         }
     }
+unset($id_valor);
 }
 echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
             }else{

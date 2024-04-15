@@ -47,7 +47,10 @@ if($_POST){
 
     foreach($user as $key_user => $value_user){
         $id_usuario= $value_user;
-        $sql= $connect->query("DELETE FROM usuario WHERE `usuario`.`Id_Usuario` = '$id_usuario'");
+        $stmt = $connect->prepare("DELETE FROM usuario WHERE `usuario`.`Id_Usuario` = ?");
+        $stmt->bind_param("i", $id_usuario);
+        $stmt->execute();
+        
         if($sql==TRUE){
             header("location:dropUsuario.php");
         }
@@ -55,10 +58,12 @@ if($_POST){
             echo "Erro";
         }
     }
+unset($user);
+unset($id_usuario);
 }
 echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
             }else{
-                echo 'Você não deveria estar aqui<br>
+                echo '<br>Você não deveria estar aqui<br>
     <a href="../../open/logout.php"><button>Sair</button></a>';
             }
 ?>

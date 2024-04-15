@@ -81,14 +81,22 @@ if($_SESSION['tipo'] == 1){
         $_SESSION['nomeprod'] = $_POST['produto'];
         $nome = $_POST['produto'];
         $img = $_POST['img'];
-        $result = $connect->query("SELECT * FROM produtos WHERE Nome_Produto = '$nome'");
+        $stmt = $connect->prepare("SELECT * FROM produtos WHERE Nome_Produto = ?");
+        $stmt->bind_param("s", $nome);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
         if ($result->num_rows > 0) {
             echo "Produto já cadastrado";
         } elseif ($nome == null) {
             echo "Insira um produto válido";
         } else {
-            $sql2 = $connect->query("INSERT INTO produtos (Id_produto, Nome_Produto, Imagem_Produto) VALUES (null, '$nome', '$img')");
-            if ($sql2 === true) {
+            $stmt = $connect->prepare("INSERT INTO produtos (Id_produto, Nome_Produto, Imagem_Produto) VALUES (NULL, ?, ?)");
+            $stmt->bind_param("ss", $nome, $img);
+            
+            if ($stmt->execute() === true) {
+                unset($nome);
+                unset($img);
                 header("location:adval.php");
             }
         }

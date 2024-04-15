@@ -103,6 +103,10 @@ $result = $connect->query("UPDATE produtos SET Nome_Produto='$nome', Imagem_Prod
             $sql1 = $connect->query("UPDATE valores SET Valor='$preco' WHERE Id_Mercado='$id' AND Id_Produto='$prod'");
 
             if ($sql1 === true) {
+                unset($prod);
+                unset($valor);
+                unset($nome);
+                unset($img);
             }
         }
     } else {

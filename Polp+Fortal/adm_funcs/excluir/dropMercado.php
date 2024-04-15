@@ -41,25 +41,32 @@ if($_POST){
     $mercad= isset($_POST['mercad']) ? $_POST['mercad'] : null;
 
     foreach($mercad as $key_mercad => $value_mercad){
-        $sql= $connect->query("SELECT * FROM valores WHERE Id_Mercado='$value_mercad'");
-        while($l=  $sql-> fetch_assoc()){
+        $stmt = $connect->prepare("SELECT * FROM valores WHERE Id_Mercado = ?");
+        $stmt->bind_param("i", $value_mercad);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while($l=  $result-> fetch_assoc()){
             $id_valor=$l['Id_Valor'];
 
-            $sqli= $connect->query("DELETE FROM valores WHERE `Valores`.`Id_Valor` = '$id_valor'");
-            if($sqli==TRUE){
-            }
+            $stmt = $connect->prepare("DELETE FROM valores WHERE `Valores`.`Id_Valor` = ?");
+            $stmt->bind_param("i", $id_valor);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0){}
             else{
                 echo "Erro";
             }
         }
-        $sqle= $connect->query("DELETE FROM mercado WHERE `mercado`.`Id_Mercado` = '$value_mercad'");
-        if($sqle==TRUE){
+        $stmt = $connect->prepare("DELETE FROM mercado WHERE `mercado`.`Id_Mercado` = ?");
+        $stmt->bind_param("i", $value_mercad);
+        if($stmt->execute()==TRUE){
             header("location:../../indexADM.php");
         }
         else{
             echo "Erro";
         }
     }
+unset($id_valor);
 }
 echo "<a href='../../indexADM.php'><button>Voltar</button></a>";
             }else{

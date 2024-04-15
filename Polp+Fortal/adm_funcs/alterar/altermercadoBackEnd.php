@@ -6,11 +6,15 @@ if($_POST){
     $Id_Mercado = $_POST['Id_Mercado'];
     $Nome_Mercado = $_POST['Nome_Mercado'];
     $Imagem_Mercado = $_POST['Imagem_Mercado'];
-    $Alterar_Mercado = $connect->query("Update mercado SET Nome_Mercado='$Nome_Mercado', Imagem_Mercado='$Imagem_Mercado' WHERE Id_Mercado='$Id_Mercado'");
+    $stmt = $connect->prepare("UPDATE mercado SET Nome_Mercado = ?, Imagem_Mercado = ? WHERE Id_Mercado = ?");
+$stmt->bind_param("ssi", $Nome_Mercado, $Imagem_Mercado, $Id_Mercado);
 
-    if($Alterar_Mercado === true){
+    if($stmt->execute() === true){
         echo "<a href='altermercado.php'><button>Voltar</button></a>";
     }
+unset($Id_Mercado);
+unset($Nome_Mercado);
+unset($Imagem_Mercado);
 }
 echo '<br><a href="../../indexADM.php"><button>Index</button></a>';
 }else{

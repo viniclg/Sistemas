@@ -6,10 +6,13 @@ $nome = $_POST['nome'];
 $senha = $_POST['senha'];
 $email = $_POST['login'];
 $senha = md5($senha);
+$tipo = 0;
 
-$query = "SELECT * FROM usuario WHERE nome ='$nome' or login = '$email'";
-$result = mysqli_query($connect, $query);
-$row = mysqli_fetch_array($result);
+$stmt = $connect->prepare("SELECT * FROM usuario WHERE nome = ? OR login = ?");
+$stmt->bind_param("ss", $nome, $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
 
 /* 
 o isset e !empty vai verificar se o que foi inserido no formulário é diferente de nulo
@@ -24,14 +27,19 @@ if (isset($_POST['senha']) && !empty($_POST['login'])) {
     }
     else{
         // Inserir o registro somente se o valor da chave primária não existir
-        $sql = "INSERT INTO usuario (id_usuario, nome, login, senha, tipo) VALUES ('null', '$nome', '$email', '$senha', 0)";
+        $PrepareInsert = $connect->prepare("INSERT INTO usuario (id_usuario, nome, login, senha, tipo) VALUES (NULL, ?, ?, ?, ?)");
+        $PrepareInsert->bind_param("sssi", $nome, $email, $senha, $tipo);
+        
     }
-        if ($connect->query($sql) === TRUE) {
+        if ($PrepareInsert->execute() === TRUE) {
             echo "<p>Usuário criado com sucesso!</p>";
             echo "<a href='in.php'><button>HOME</button></a>";
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
         }
+        unset($nome);
+        unset($email);
+        unset($senha);
     }else {
 
         echo 'Insira uma senha válida.';

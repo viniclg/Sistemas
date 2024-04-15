@@ -82,10 +82,12 @@ if($_SESSION['tipo'] == 1){
         $senha = ($_POST['senha']);
         $email = $_POST['login'];
         $senha = md5($senha);
+        $tipo = 1;
 
-        $query = "SELECT * FROM usuario WHERE nome ='$nome' or login = '$email'";
-        $result = mysqli_query($connect, $query);
-        $row = mysqli_fetch_array($result);
+        $stmt = $connect->prepare("SELECT * FROM usuario WHERE nome = ? OR login = ?");
+        $stmt->bind_param("ss", $nome, $email);
+        $stmt->execute();
+        $row = $stmt->get_result();
 
         /* 
         o isset e !empty vai verificar se o que foi inserido no formulário é diferente de nulo
@@ -94,25 +96,30 @@ if($_SESSION['tipo'] == 1){
         if (isset($_POST['senha']) && !empty($_POST['login'])) {
 
             //se a senha ou email estiver já no banco de dados vai mostrar a mensagem
-            if ($row) {
+            if ($row->num_rows > 0) {
                 echo "Esse nome de usuário ou senha já está sendo usado";
                 echo "<a href='../../indexADM.php'><button>OK</button></a>";
             } else {
                 // Inserir o registro somente se o valor da chave primária não existir
-                $sql = $connect->query("INSERT INTO usuario (id_usuario, nome, login, senha, tipo) VALUES ('null', '$nome', '$email', '$senha', 1)");
+                $Prepar_Insert = $connect->prepare("INSERT INTO usuario (id_usuario, nome, login, senha, tipo) VALUES (NULL, ?, ?, ?, ?)");
+                $Prepar_Insert->bind_param("sssi", $nome, $email, $senha, $tipo);
+                
+                if ($Prepar_Insert->execute() === TRUE) {
+                    echo '<div class="container"<div id="message" class="message" style="display: none;">
+                    Usuário criado com sucesso!
+                </div>
+                <div>';
+                } else {
+                    echo "Error: " . $sql . "<br>" . $con->error;
+                }
             }
-            if ($sql === TRUE) {
-                echo '<div class="container"<div id="message" class="message" style="display: none;">
-                Usuário criado com sucesso!
-            </div>
-            <div>';
-            } else {
-                echo "Error: " . $sql . "<br>" . $con->error;
-            }
+            
         } else {
             echo 'Insira uma senha válida.';
         }
-    }
+        unset($nome);
+        unset($senha);
+        unset($email);}
     echo '<div class="container">
     <h1>Cadastro de Usuário</h1>
     <form method="POST">

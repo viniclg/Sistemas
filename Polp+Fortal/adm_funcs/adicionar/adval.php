@@ -182,6 +182,8 @@
                     }
                 }
             }
+        unset($mercados);
+        unset($id_prod);
         }
     echo '<br>
     <a href="../../indexADM.php"><button>Voltar</button></a>
