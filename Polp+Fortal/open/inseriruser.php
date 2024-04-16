@@ -2,9 +2,9 @@
 require_once "../c.php";
 session_start();
 
-$nome = $_POST['nome'];
-$senha = $_POST['senha'];
-$email = $_POST['login'];
+$nome = strip_tags($_POST['nome']);
+$senha = strip_tags($_POST['senha']);
+$email = strip_tags($_POST['login']);
 $senha = md5($senha);
 $tipo = 0;
 

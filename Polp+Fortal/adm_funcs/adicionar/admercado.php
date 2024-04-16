@@ -78,8 +78,11 @@
     session_start();
 if($_SESSION['tipo'] == 1){
     if ($_POST) {
-        $nome = $_POST['nome'];
+        $img = strip_tags($_POST['img']);
+        $nome = strip_tags($_POST['nome']);
+        if(!is_string($img) || !is_string($nome)){
 
+        }
         $stmt = $connect->prepare("SELECT * FROM mercado WHERE Nome_Mercado LIKE ?");
         $like = '%' . $nome . '%';
         $stmt->bind_param("s", $like);
@@ -88,7 +91,6 @@ if($_SESSION['tipo'] == 1){
         if ($result->num_rows > 0) {
             echo "Esse mercado já existe";
         } else {
-            $img = $_POST['img'];
             $stmt = $connect->prepare("INSERT INTO mercado (Id_mercado, Nome_Mercado, Imagem_Mercado) VALUES (NULL, ?, ?)");
             $stmt->bind_param("ss", $nome, $img);
             

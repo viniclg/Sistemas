@@ -3,11 +3,13 @@ require_once "../../c.php";
 session_start();
 if($_SESSION['tipo'] == 1){
 if($_POST){
-    $Id_Mercado = $_POST['Id_Mercado'];
-    $Nome_Mercado = $_POST['Nome_Mercado'];
-    $Imagem_Mercado = $_POST['Imagem_Mercado'];
+    $Id_Mercado = strip_tags($_POST['Id_Mercado']);
+    $Nome_Mercado = strip_tags($_POST['Nome_Mercado']);
+    $Imagem_Mercado = strip_tags($_POST['Imagem_Mercado']);
+    
     $stmt = $connect->prepare("UPDATE mercado SET Nome_Mercado = ?, Imagem_Mercado = ? WHERE Id_Mercado = ?");
-$stmt->bind_param("ssi", $Nome_Mercado, $Imagem_Mercado, $Id_Mercado);
+    
+    $stmt->bind_param("ssi", $Nome_Mercado, $Imagem_Mercado, $Id_Mercado);
 
     if($stmt->execute() === true){
         echo "<a href='altermercado.php'><button>Voltar</button></a>";

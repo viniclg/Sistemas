@@ -164,7 +164,7 @@
         if ($_POST) {
             if (empty($_POST['preco']) || count($_POST['preco']) == 0) {
             }else{
-            @$id_prod = $_POST['produtos'];
+            @$id_prod = strip_tags($_POST['produtos']);
             @$array2 = array();
             @$mercados = array();
             foreach ($_POST['preco'] as $preco) {

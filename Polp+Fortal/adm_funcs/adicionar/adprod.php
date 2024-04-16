@@ -79,8 +79,11 @@
 if($_SESSION['tipo'] == 1){
     if ($_POST) {
         $_SESSION['nomeprod'] = $_POST['produto'];
-        $nome = $_POST['produto'];
-        $img = $_POST['img'];
+        $nome = strip_tags($_POST['produto']);
+        $img = strip_tags($_POST['img']);
+        if(!is_string($nome) || !is_string($img)){
+            echo "O nome ou imagem tem que ser só caracteres.";
+        }
         $stmt = $connect->prepare("SELECT * FROM produtos WHERE Nome_Produto = ?");
         $stmt->bind_param("s", $nome);
         $stmt->execute();

@@ -78,11 +78,13 @@
     session_start();
 if($_SESSION['tipo'] == 1){
     if ($_POST) {
-        $nome = $_POST['nome'];
-        $senha = ($_POST['senha']);
-        $email = $_POST['login'];
+        $nome = strip_tags($_POST['nome']);
+        $senha = strip_tags(($_POST['senha']));
+        $email = strip_tags($_POST['login']);
         $senha = md5($senha);
         $tipo = 1;
+        if(!is_string($nome) ||!is_string($senha) ||!is_string($email)){
+        }
 
         $stmt = $connect->prepare("SELECT * FROM usuario WHERE nome = ? OR login = ?");
         $stmt->bind_param("ss", $nome, $email);

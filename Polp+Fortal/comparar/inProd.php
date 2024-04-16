@@ -30,7 +30,7 @@ if($_POST){
     }
     ?>
     <h2>Selecione o(s) produtos</h2>
-    <form method="post" action="comparacao1.php">
+    <form method="post" action="comparacao.php">
         <?php
         $resultado=$connect->query("SELECT * FROM produtos");
         if($resultado->num_rows > 0){
